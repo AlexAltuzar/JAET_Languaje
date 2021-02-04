@@ -46,11 +46,17 @@ public class LexicalAnalyzer extends Observable {
             else if (word.equals(" "));
             else if (word.equals("")); // Evita error al introducir un solo símbolo reconocido.
 
-            /*else if (word.equals("\"")){
+            else if (word.equals("\"")){
                 int pos = cadenaIsValid(i);
                 if(pos!=-1)
                     i = pos;
-            }*/
+            }
+
+            else if (word.equals("\'")){
+                int pos = caracterIsValid(i);
+                if(pos!=-1)
+                    i = pos;
+            }
 
             else if (groupSymbols.isValid(word))
                 lexicon.add(new LexicalToken(word,"Símbolo de agrupación"));
@@ -101,6 +107,26 @@ public class LexicalAnalyzer extends Observable {
         existError = true;
         setChanged();
         notifyObservers("Error sintaxis. text: \" '"+ " " + cadena.trim() +" ' se esperaba ' \"' \" ");
+        return pos;
+    }
+
+    private int caracterIsValid(int pos){
+        String cadena = code[pos]; pos++;
+        while (pos < this.code.length){
+            if (code[pos].equals("\n"))
+                cadena += "\\n";
+            else
+                cadena = cadena + code[pos];
+            if (code[pos].equals("\'")){
+                lexicon.add(new LexicalToken(cadena,"Caracter"));
+                return pos;
+            }
+            pos++;
+        }
+        lexicon.add(new LexicalToken(cadena,"No es una declaración"));
+        existError = true;
+        setChanged();
+        notifyObservers("Error sintaxis. text: \" '"+ " " + cadena.trim() +" ' se esperaba ' \'' \' ");
         return pos;
     }
 
