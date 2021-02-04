@@ -61,7 +61,7 @@ public class LexicalAnalyzer extends Observable {
                 lexicon.add(new LexicalToken(word,"Palabra reservada"));
 
             else if (variable.isValid(word))
-                lexicon.add(new LexicalToken(word,"Variable o identificador"));
+                lexicon.add(new LexicalToken(word,"Variable"));
 
             else if (mathematicalOperators.isValid(word))
                 lexicon.add(new LexicalToken(word,"Operador matemático"));
@@ -72,8 +72,8 @@ public class LexicalAnalyzer extends Observable {
             else if (symbols.isValid(word))
                 lexicon.add(new LexicalToken(word,"Símbolo"));
 
-            else if (space.isValid(word))
-                lexicon.add(new LexicalToken(word,"Salto de línea"));
+            else if (space.isValid(word)){}
+                //lexicon.add(new LexicalToken(word,"Salto de línea"));
 
             else {
                 lexicon.add(new LexicalToken(word,"No es una declaración"));
@@ -111,11 +111,7 @@ public class LexicalAnalyzer extends Observable {
         code = code+"\n";
         Pattern p = Pattern.compile("(//)[^\\n]*\\n");
         Matcher m = p.matcher(code);
-        code = m.replaceAll("\n");
 
-        p = Pattern.compile("(#)[^\\n]*\\n");
-        m = p.matcher(code);
-        code = m.replaceAll("\n");
 
         p=Pattern.compile("==");
         m=p.matcher(code);
@@ -129,9 +125,15 @@ public class LexicalAnalyzer extends Observable {
         p=Pattern.compile("!=");
         m=p.matcher(code);
         code = m.replaceAll("wbksmd8iferentEdnfusn");
+
         p=Pattern.compile("#");
         m=p.matcher(code);
         code = m.replaceAll("?comentario?%");
+        p=Pattern.compile(":=");
+        m=p.matcher(code);
+        code = m.replaceAll("?inicioExpresion?%");
+
+
         p=Pattern.compile("\\+\\+");
         m=p.matcher(code);
         code = m.replaceAll("?incremetar?%");
@@ -149,9 +151,11 @@ public class LexicalAnalyzer extends Observable {
         signos.add("\\^");
         //Símbolos
         signos.add("#");
-        signos.add("->");
+        signos.add("-");
+        signos.add(">");
         signos.add(",");
-        signos.add(":=");
+        signos.add(":");
+        signos.add("=");
         signos.add(";");
         //Operadores Relacionales
         signos.add("<");
@@ -189,6 +193,9 @@ public class LexicalAnalyzer extends Observable {
         p=Pattern.compile("\\?comentario\\?%");
         m=p.matcher(code);
         code = m.replaceAll(espacio+"#"+espacio);
+        p=Pattern.compile("\\?inicioExpresion\\?%");
+        m=p.matcher(code);
+        code = m.replaceAll(espacio+":="+espacio);
         p=Pattern.compile("\\?incremetar\\?%");
         m=p.matcher(code);
         code = m.replaceAll(espacio+"++"+espacio);

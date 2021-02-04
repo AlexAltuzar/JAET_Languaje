@@ -4,10 +4,8 @@ import jaet.Models.Interfaces.Validate;
 
 public class TokenGroupSymbols extends Analyzer implements Validate {
 
-    public final static String groupSymbols = "(" + ")" + "{"+"}"+ "\""  + "\'";
-
     public TokenGroupSymbols(){
-        super(groupSymbols);
+        super("(" + "\"" + "|" + "\\)" + "|" + "\\(" + "|" + "\\{" + "|" + "\\}" + "|" + "\'" + ")");
     }
 
     @Override

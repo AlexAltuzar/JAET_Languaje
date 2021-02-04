@@ -1,8 +1,50 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<GridPane fx:controller="jaet.Views.LexicalController"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="691.0" style="-fx-background-color: #83a4d4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jaet.Views.LexicalController">
+   <children>
+      <TextArea fx:id="terminal" layoutX="14.0" layoutY="73.0" prefHeight="298.0" prefWidth="349.0" promptText="Ingrese su codigo">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextArea>
+      <TableView fx:id="tableLexicon" layoutX="371.0" layoutY="73.0" prefHeight="298.0" prefWidth="299.0">
+        <columns>
+          <TableColumn fx:id="tableColumnLexicon" prefWidth="119.0" text="Léxico" />
+          <TableColumn fx:id="tableColumnToken" prefWidth="190.0" text="Token" />
+        </columns>
+      </TableView>
+      <Label layoutX="276.0" layoutY="23.0" prefHeight="44.0" prefWidth="105.0" text="JAET">
+         <font>
+            <Font size="34.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="0.7523809523809524" endY="0.12857142857142856" startX="0.7523809523809524" startY="0.7761904761904761">
+               <stops>
+                  <Stop color="#0000007d" />
+                  <Stop color="#a80b0b" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Button fx:id="btnAnalyze" layoutX="234.0" layoutY="391.0" mnemonicParsing="false" onMouseClicked="#CompileAnalyzer" prefHeight="40.0" prefWidth="128.0" style="-fx-background-color: #fffde4;" text="Compilar">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+   </children>
+   <styleClass>
+      <String fx:value="background: -webkit-linear-gradient(to right, #83a4d4, #b6fbff)" />
+      <String fx:value="background: linear-gradient(to right, #83a4d4, #b6fbff)" />
+   </styleClass>
+</AnchorPane>
