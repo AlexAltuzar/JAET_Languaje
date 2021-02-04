@@ -4,7 +4,7 @@ import jaet.Models.Interfaces.Validate;
 
 public class TokenSymbols extends Analyzer implements Validate {
 
-    public final static String symbols = "(,|#|;|:=)";
+    public final static String symbols = "^(,|#|;|:=)$";
 
     public TokenSymbols(){
         super(symbols);

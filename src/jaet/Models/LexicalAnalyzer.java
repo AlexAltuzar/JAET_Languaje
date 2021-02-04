@@ -40,19 +40,17 @@ public class LexicalAnalyzer extends Observable {
 
         for(int i = 0; i<this.code.length; i++){
             String word = this.code[i];
-
-
             if (number.isValid(word))
                 lexicon.add(new LexicalToken(word, "Numeral"));
 
             else if (word.equals(" "));
             else if (word.equals("")); // Evita error al introducir un solo símbolo reconocido.
 
-            else if (word.equals("\"")){
+            /*else if (word.equals("\"")){
                 int pos = cadenaIsValid(i);
                 if(pos!=-1)
                     i = pos;
-            }
+            }*/
 
             else if (groupSymbols.isValid(word))
                 lexicon.add(new LexicalToken(word,"Símbolo de agrupación"));
@@ -66,17 +64,17 @@ public class LexicalAnalyzer extends Observable {
             else if (mathematicalOperators.isValid(word))
                 lexicon.add(new LexicalToken(word,"Operador matemático"));
 
-            else if (relationalOperators.isValid(word))
-                lexicon.add(new LexicalToken(word,"Operador relacional"));
-
-            else if (symbols.isValid(word))
-                lexicon.add(new LexicalToken(word,"Símbolo"));
-
+            else if (relationalOperators.isValid(word)) {
+                lexicon.add(new LexicalToken(word, "Operador relacional"));
+            }
+            else if (symbols.isValid(word)) {
+                lexicon.add(new LexicalToken(word, "Símbolo"));
+            }
             else if (space.isValid(word)){}
                 //lexicon.add(new LexicalToken(word,"Salto de línea"));
 
             else {
-                lexicon.add(new LexicalToken(word,"No es una declaración"));
+                lexicon.add(new LexicalToken(word,"Declaración inválida"));
                 existError = true;
                 setChanged();
                 notifyObservers("Error léxico. símbolo: \" ' " + word.trim() + " ' no reconocido \" ");
@@ -109,10 +107,8 @@ public class LexicalAnalyzer extends Observable {
     private void separateWords(String code){
         String espacio = "\\?espacio\\?%";
         code = code+"\n";
-        Pattern p = Pattern.compile("(//)[^\\n]*\\n");
-        Matcher m = p.matcher(code);
-
-
+        Pattern p;
+        Matcher m;
         p=Pattern.compile("==");
         m=p.matcher(code);
         code = m.replaceAll("f5df58oBleIguaLlkwemf");
@@ -125,50 +121,35 @@ public class LexicalAnalyzer extends Observable {
         p=Pattern.compile("!=");
         m=p.matcher(code);
         code = m.replaceAll("wbksmd8iferentEdnfusn");
-
-        p=Pattern.compile("#");
-        m=p.matcher(code);
-        code = m.replaceAll("?comentario?%");
         p=Pattern.compile(":=");
         m=p.matcher(code);
-        code = m.replaceAll("?inicioExpresion?%");
-
-
+        code = m.replaceAll("qwertyinicioExpresionasdfg");
         p=Pattern.compile("\\+\\+");
         m=p.matcher(code);
-        code = m.replaceAll("?incremetar?%");
+        code = m.replaceAll("?incrementar?%");
         p=Pattern.compile("--");
         m=p.matcher(code);
         code = m.replaceAll("?disminuir?%");
 
         ArrayList<String> signos = new ArrayList<>();
-        //Operadores Matemáticos
 
         signos.add("\\+");
         signos.add("-");
         signos.add("\\*");
         signos.add("/");
         signos.add("\\^");
-        //Símbolos
         signos.add("#");
-        signos.add("-");
-        signos.add(">");
         signos.add(",");
-        signos.add(":");
-        signos.add("=");
         signos.add(";");
-        //Operadores Relacionales
         signos.add("<");
         signos.add(">");
         signos.add("=");
-        //Símbolos de agrupación
         signos.add("\"");
         signos.add("\\(");
         signos.add("\\)");
         signos.add("\\{");
         signos.add("\\}");
         signos.add("\'");
-        //Espacios
         signos.add("\n");
         signos.add(" ");
 
@@ -177,7 +158,6 @@ public class LexicalAnalyzer extends Observable {
             m = p.matcher(code);
             code = m.replaceAll(espacio+signos.get(i)+espacio);
         }
-
         p=Pattern.compile("f5df58oBleIguaLlkwemf");
         m=p.matcher(code);
         code = m.replaceAll(espacio+"=="+espacio);
@@ -190,13 +170,12 @@ public class LexicalAnalyzer extends Observable {
         p=Pattern.compile("wbksmd8iferentEdnfusn");
         m=p.matcher(code);
         code = m.replaceAll(espacio+"!="+espacio);
-        p=Pattern.compile("\\?comentario\\?%");
-        m=p.matcher(code);
-        code = m.replaceAll(espacio+"#"+espacio);
-        p=Pattern.compile("\\?inicioExpresion\\?%");
+
+        p=Pattern.compile("qwertyinicioExpresionasdfg");
         m=p.matcher(code);
         code = m.replaceAll(espacio+":="+espacio);
-        p=Pattern.compile("\\?incremetar\\?%");
+
+        p=Pattern.compile("\\?incrementar\\?%");
         m=p.matcher(code);
         code = m.replaceAll(espacio+"++"+espacio);
         p=Pattern.compile("\\?disminuir\\?%");
@@ -206,6 +185,7 @@ public class LexicalAnalyzer extends Observable {
         code = code.trim();
 
         this.code = code.split("(\t|"+espacio+")+");
+
     }
 
     public boolean existError(){

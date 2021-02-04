@@ -4,7 +4,7 @@ import jaet.Models.Interfaces.Validate;
 
 public class TokenRelationalOperators extends Analyzer implements Validate {
 
-    public final static String relationalOperator = "(<|>|<=|>=|=|==|!=)";
+    public final static String relationalOperator = "^(<|>|<=|>=|=|==|!=)$";
 
     public TokenRelationalOperators() {
         super(relationalOperator);
