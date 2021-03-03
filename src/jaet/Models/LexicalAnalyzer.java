@@ -134,46 +134,6 @@ public class LexicalAnalyzer extends Observable {
         return lexicon;
     }
 
-    private int cadenaIsValid(int pos){
-        String cadena = code[pos]; pos++;
-        while (pos < this.code.length){
-            if (code[pos].equals("\n"))
-                cadena += "\\n";
-            else
-                cadena = cadena + code[pos];
-            if (code[pos].equals("\"")){
-                lexicon.add(new LexicalToken(cadena,"Cadena"));
-                return pos;
-            }
-            pos++;
-        }
-        lexicon.add(new LexicalToken(cadena,"No es una declaración"));
-        existError = true;
-        setChanged();
-        notifyObservers("Error sintaxis. text: \" '"+ " " + cadena.trim() +" ' se esperaba ' \"' \" ");
-        return pos;
-    }
-
-    private int caracterIsValid(int pos){
-        String cadena = code[pos]; pos++;
-        while (pos < this.code.length){
-            if (code[pos].equals("\n"))
-                cadena += "\\n";
-            else
-                cadena = cadena + code[pos];
-            if (code[pos].equals("\'")){
-                lexicon.add(new LexicalToken(cadena,"Caracter"));
-                return pos;
-            }
-            pos++;
-        }
-        lexicon.add(new LexicalToken(cadena,"No es una declaración"));
-        existError = true;
-        setChanged();
-        notifyObservers("Error sintaxis. text: \" '"+ " " + cadena.trim() +" ' se esperaba ' \'' \' ");
-        return pos;
-    }
-
     private void separateWords(String code){
         String espacio = "\\?espacio\\?%";
         code = code+"\n";

@@ -22,14 +22,12 @@ public class Main extends Application {
     public static void main(String[] args) {
         AnalysisTable table = new AnalysisTable();
         //table.contarTabla();
-        /*
-        System.out.println(table.existDerivation("<DCM>","#"));
-        System.out.println(table.existDerivation("<RC>","\\{"));
-        System.out.println(table.existDerivation("<DCM>","#"));
-        System.out.println(table.existDerivation("<DCM>","#"));
-        System.out.println(table.existDerivation("<DCM>","#"));
-        System.out.println(table.existDerivation("<DCM>","#"));
-        System.out.println(table.existDerivation("<DCM>","#"));*/
+        String [] datosAleer = {"\"","\'","0","1","2","3","4","5","6","7","8","9"};
+                //{"#","a","_","while","for","enterokay","stamp","scegliere","{"};
+        for(int i=0;i< datosAleer.length;i++) {
+            table.existDerivation("<TD>", datosAleer[i]);
+        }
+
         launch(args);
     }
 }
