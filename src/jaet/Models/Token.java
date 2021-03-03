@@ -11,8 +11,8 @@ public class Token {
     private String reservedWords = "^(archivio|init|main|current_|funzione|stamp|scegliere|if|else|while|for|return|enterokay|true|false|break|default)\\z";
     private String space = "^\n$";
     private String symbols = "^(,|#|;|:=)$";
-    private String letter = "^[a-z]$";
-    private String alphanumerics = "^[\\s|\\S]*$";
+    private String letter = "^[a-zA-Z]$";
+    private String alphanumerics = "^(\\S)*";
     private Pattern pattern;
     private Matcher match;
 

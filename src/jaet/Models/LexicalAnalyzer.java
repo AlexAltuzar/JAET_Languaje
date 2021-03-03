@@ -74,11 +74,7 @@ public class LexicalAnalyzer extends Observable {
             }
             //ANALIZAR
             else if (token.isLetter(word)) {
-                variable = word.toCharArray();
-                for (int j = 0; j < variable.length; j++) {
-                    words.add(String.valueOf(variable[j]));
-                }
-                lexicon.add(new LexicalToken(word, "Variable"));
+
             }
             else if (token.isMathematicalOperator(word)) {
                 lexicon.add(new LexicalToken(word, "Operador matemático"));
@@ -94,20 +90,47 @@ public class LexicalAnalyzer extends Observable {
             }
             else if (token.isSpace(word)){}
                 //lexicon.add(new LexicalToken(word,"Salto de línea"));
-            else if (token.isAlphanumerics(word)){
+
+           /* else if (token.isAlphanumerics(word)){
                 words.add(word);
 
-            }
+            }*/
 
             else {
+                variable = word.toCharArray();
+                String text = " ";
+                String string = " ";
+                for (int j = 0; j < variable.length; j++) {
+                    if(token.isLetter(String.valueOf(variable[j]))){
+                        words.add(String.valueOf(variable[j]));
+                        text += String.valueOf(variable[j]);
+                    }else{
 
-                lexicon.add(new LexicalToken(word,"Declaración inválida"));
+                    }
+
+                    //Si hay algun caracter que no sea leido por variable, es un comentario y por lo tanto
+                    //no es variable
+                    /*if(token.isAlphanumerics(String.valueOf(variable[j]))){
+                        string += String.valueOf(variable[j]);
+                    }*/
+                }
+
+                /*if(!string.equals(" ")){
+                    lexicon.add(new LexicalToken(word, "Comentario"));
+                }*/
+
+                if(!text.equals(" ")){
+                    lexicon.add(new LexicalToken(word, "Variable"));
+                }
+
+                /*lexicon.add(new LexicalToken(word,"Declaración inválida"));
                 existError = true;
                 setChanged();
-                notifyObservers("Error léxico. símbolo: \" ' " + word.trim() + " ' no reconocido \" ");
+                notifyObservers("Error léxico. símbolo: \" ' " + word.trim() + " ' no reconocido \" ");*/
             }
 
         }
+        System.out.println(words);
         return lexicon;
     }
 
