@@ -9,7 +9,7 @@ public class AnalysisTable {
 
     private String table [][] = {
             {" ","archivio","funzione","init","#","ALPHANUMERICS","^[a-zA-Z]$","_","^(=)$","^(\\+|\\-|\\*|/|\\^)$","while","for","enterokay","stamp","\"","true|false","^[0-9]$",",","if","else","scegliere","\'","dafault","break","return","^(<|>|<=|>=|==|!=)$","^(\\+\\+|\\-\\-)$","\\}",";","\\{","\\)","\\("},
-            {"<DC>","archivio <V> { <DM> <CA> }"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "},
+            {"<DA>","archivio <V> { <DM> <CA> }"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "},
             {"<CA>"," ","<DFUN> <CA>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","ε"," "," "," "," "},
             {"<DM>"," "," ","init main ( current_ ) { <CUR> }"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "},
             {"<DCM>"," "," "," ","# <RCM>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "},
@@ -18,11 +18,11 @@ public class AnalysisTable {
             {"<RDV>"," "," "," "," "," "," "," ","= S"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","<CONT>"," "," "," "," "," "},
             {"<DW>"," "," "," "," "," "," "," "," "," ","while := <E> { <CUR> <RRET> }"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "},
             {"<DF>"," "," "," "," "," "," "," "," "," "," ","for := <EF> { <CUR> <RRET> }"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "},
-            {"<EF>"," "," "," "," "," ","<DV>; <E>;<V> <CONT>","<DV>; <E>;<V> <CONT>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "},
+            {"<EF>"," "," "," "," "," ","<DV> ; <E> ; <V> <CONT>","<DV> ; <E> ; <V> <CONT>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "},
             {"<DE>"," "," "," "," "," "," "," "," "," "," "," ","enterokay <V>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "},
             {"<DS>"," "," "," "," "," "," "," "," "," "," "," "," ","stamp ( <CONC> )"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "},
             {"<CONC>"," "," "," "," "," "," ","<S> <RC>"," "," "," "," "," "," ","<S> <RC>","<S> <RC>","<S> <RC>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "},
-            {"<RC>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ",",<S> <RC>"," "," "," "," "," "," "," "," "," "," "," "," ","ε"," "},
+            {"<RC>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ",", <S> <RC>"," "," "," "," "," "," "," "," "," "," "," "," ","ε"," "},
             {"<DIF>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","if := <EX> { <CUR> <RREST> } <RIF>"," "," "," "," "," "," "," "," "," "," "," "," "," "},
             {"<RIF>"," "," "," ","ε"," ","ε","ε"," "," ","ε","ε","ε","ε"," "," "," "," ","ε","else <RE>","ε"," "," "," "," "," "," "," "," "," "," "," "},
             {"<RE>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","<DIF>"," "," "," "," "," "," "," "," ","{ <CUR> }"," "," "," "," "},
@@ -30,8 +30,8 @@ public class AnalysisTable {
             {"<P>"," "," "," "," "," ","<V> <RP>","<V> <RP> "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "},
             {"<RP>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ",", <V> <RP>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "},
             {"<DSC>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","scegliere := <V> { <OP> }"," "," "," "," "," "," "," "," "," ","ε"," "},
-            {"<OP>"," "," "," "," "," ","<TC> <RO>"," "," "," "," "," "," "," ","<TC> <RO>"," "," "," "," "," "," ","<TC> <RO>"," "," "," "," "," "," "," "," "," "," "},
-            {"<RO>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","default { <CUR> }"," "," "," ","ε"," "," "," "," "},
+            {"<OP>"," "," "," "," "," "," "," "," "," "," "," "," "," ","<TC> <ROPC>"," ","<TC> <RO>"," "," "," "," ","<TC> <ROPC>"," "," "," "," "," "," "," "," "," "," "},
+            {"<ROPC>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","default { <CUR> }"," "," "," ","ε"," "," "," "," "},
             {"<TD>"," "," "," "," "," "," "," "," "," "," "," "," "," ","\" <C> \""," ","<N>"," "," "," "," ","\' <L> \'"," "," "," "," "," "," "," "," "," "," "},
             {"<TC>"," "," "," "," "," "," "," "," "," "," "," "," "," ","<TD> { <CUR> } <RTC> <CT>"," ","<TD> { <CUR> } <RTC> <CT>"," "," "," "," ","<TD> { <CUR> } <RTC> <CT>"," "," "," "," "," "," "," "," "," "," "},
             {"<RTC>"," "," "," "," "," "," "," "," "," "," "," "," "," ","ε"," ","ε"," "," "," "," ","ε"," ","break"," "," "," "," "," "," "," "," "},
@@ -62,6 +62,7 @@ public class AnalysisTable {
 
     public boolean existDerivation(String notTerminal, String terminal){
         production.clear();
+        String[] words;
         int row=0, column=0;
         String[] columns;
         String derivation;
@@ -69,9 +70,9 @@ public class AnalysisTable {
             columns = table[i];
             for(int j=0; j<columns.length;j++){
                 if(table[i][0].equals(notTerminal) && isValid(terminal, table[0][j])){
-                    /*if(table[i][0].equals("<TipoDato>") || table[i][0].equals("<Letra>")){
+                    if(table[i][0].equals("<L>") || table[i][0].equals("<O>") || table[i][0].equals("<B>") || table[i][0].equals("<N>") || table[i][0].equals("<OR>") || table[i][0].equals("<CONT>")){
                         table[i][j] = terminal;
-                    }*/
+                    }
                     row = i;
                     column = j;
                     break;
@@ -83,23 +84,22 @@ public class AnalysisTable {
             column=0;
         }
         derivation = table[row][column];
-        System.out.println(derivation);
         if(!derivation.equals(" ")) {
-            /*if(!derivation.equals("Ø")){
-                production.addAll(words.analyse(derivation));
-
-            }*/
+            if(!derivation.equals("ε")){
+                words = derivation.split(" ");
+                for (int i = 0; i < words.length; i++) {
+                    String word = words[i];
+                    production.add(word);
+                }
+            }
             return true;
         }
         return false;
 
     }
 
-    public void contarTabla(){
-        for (int i = 0; i < table.length; i++) {
-            String[] columns = table[i];
-            System.out.println("FILA "+i+" "+columns.length);
-        }
+    public ArrayList<String> getProduction() {
+        return production;
     }
 
     public boolean isValid(String input, String regex){
@@ -108,6 +108,50 @@ public class AnalysisTable {
         pattern = Pattern.compile(regex);
         match = pattern.matcher(input);
         return match.find();
+    }
+
+    public boolean isNotTerminal(String notTerminal){
+
+        for (int i = 0; i < table.length; i++) {
+            if(table[i][0].equals(notTerminal))
+                return true;
+        }
+        return false;
+    }
+
+    public void separateDerivation(String derivation) {
+        System.out.println(derivation);
+        String[] words;
+        words = derivation.split(" ");
+        for (int i = 0; i < words.length; i++) {
+            String word = words[i];
+            if (word.equals("")) ;
+            else if (word.equals(" ")) ;
+            else {
+                if (isCorrect(word)) {
+                    production.add(word);
+                } else {
+                    char[] letras = word.toCharArray();
+                    for (int j = 0; j < letras.length; j++) {
+                        production.add(String.valueOf(letras[j]));
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean isCorrect(String word){
+        System.out.println(word);
+        String[] columns;
+        for(int i=0;i<table.length;i++){
+            columns = table[i];
+            for(int j=0; j<columns.length;j++){
+                if(word.equals(table[0][j]) || word.equals(table[i][0])){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

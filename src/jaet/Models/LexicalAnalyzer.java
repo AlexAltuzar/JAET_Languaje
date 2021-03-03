@@ -25,14 +25,6 @@ public class LexicalAnalyzer extends Observable {
         this.lexicon = new ArrayList<>();
         this.code = null;
         this.token = new Token();
-       /* this.number = new TokenNumber();
-        this.groupSymbols = new TokenGroupSymbols();
-        this.variable = new TokenVariable();
-        this.mathematicalOperators = new TokenMathematicalOperators();
-        this.reservedWords = new TokenReservedWords();
-        this.relationalOperators = new TokenRelationalOperators();
-        this.symbols = new TokenSymbols();
-        this.space = new TokenSpace();*/
         this.existError = false;
     }
 
@@ -41,52 +33,39 @@ public class LexicalAnalyzer extends Observable {
         char [] variable;
         existError = false;
         lexicon.clear();
+        words.clear();
         separateWords(code);
 
         for(int i = 0; i<this.code.length; i++){
             String word = this.code[i];
             if (token.isNumber(word)){
                 lexicon.add(new LexicalToken(word, "Numeral"));
-                words.add(word);
+                //words.add(word);
             }
             else if (word.equals(" "));
-            else if (word.equals("")); // Evita error al introducir un solo símbolo reconocido.
-
-            /*else if (word.equals("\"")){
-                int pos = cadenaIsValid(i);
-                if(pos!=-1)
-                    i = pos;
-            }
-
-            else if (word.equals("\'")){
-                int pos = caracterIsValid(i);
-                if(pos!=-1)
-                    i = pos;
-            }*/
-
+            else if (word.equals(""));
             else if (token.isGroupSymbols(word)) {
                 lexicon.add(new LexicalToken(word, "Símbolo de agrupación"));
-                words.add(word);
+                //words.add(word);
             }
             else if (token.isReservedWords(word)) {
                 lexicon.add(new LexicalToken(word, "Palabra reservada"));
-                words.add(word);
+                //words.add(word);
             }
-            //ANALIZAR
-            else if (token.isLetter(word)) {
+            /*else if (token.isLetter(word)) {
 
-            }
+            }*/
             else if (token.isMathematicalOperator(word)) {
                 lexicon.add(new LexicalToken(word, "Operador matemático"));
-                words.add(word);
+                //words.add(word);
             }
             else if (token.isRelationalOperator(word)) {
                 lexicon.add(new LexicalToken(word, "Operador relacional"));
-                words.add(word);
+                //words.add(word);
             }
             else if (token.isSymbols(word)) {
                 lexicon.add(new LexicalToken(word, "Símbolo"));
-                words.add(word);
+                //words.add(word);
             }
             else if (token.isSpace(word)){}
                 //lexicon.add(new LexicalToken(word,"Salto de línea"));
@@ -99,38 +78,36 @@ public class LexicalAnalyzer extends Observable {
             else {
                 variable = word.toCharArray();
                 String text = " ";
-                String string = " ";
+                boolean isVariable = true;
                 for (int j = 0; j < variable.length; j++) {
                     if(token.isLetter(String.valueOf(variable[j]))){
                         words.add(String.valueOf(variable[j]));
                         text += String.valueOf(variable[j]);
                     }else{
-
+                        isVariable = false;
+                        break;
                     }
-
-                    //Si hay algun caracter que no sea leido por variable, es un comentario y por lo tanto
-                    //no es variable
-                    /*if(token.isAlphanumerics(String.valueOf(variable[j]))){
-                        string += String.valueOf(variable[j]);
-                    }*/
                 }
-
-                /*if(!string.equals(" ")){
-                    lexicon.add(new LexicalToken(word, "Comentario"));
-                }*/
-
-                if(!text.equals(" ")){
-                    lexicon.add(new LexicalToken(word, "Variable"));
+                if(!text.equals(" ") && isVariable==true){
+                    //lexicon.add(new LexicalToken(word, "Variable"));
+                    for(int j=0;j<words.size();j++){
+                        lexicon.add(new LexicalToken(words.get(j),"Letra"));
+                    }
+                    //System.out.println(words);
+                }else{
+                    lexicon.add(new LexicalToken(word,"Declaración inválida"));
+                    existError = true;
                 }
-
-                /*lexicon.add(new LexicalToken(word,"Declaración inválida"));
-                existError = true;
+                /*
                 setChanged();
                 notifyObservers("Error léxico. símbolo: \" ' " + word.trim() + " ' no reconocido \" ");*/
             }
 
+
         }
-        System.out.println(words);
+        for(int z=0;z< lexicon.size();z++){
+            System.out.println(lexicon.get(z));
+        }
         return lexicon;
     }
 
@@ -161,6 +138,64 @@ public class LexicalAnalyzer extends Observable {
         m=p.matcher(code);
         code = m.replaceAll("?disminuir?%");
 
+        /*
+        ArrayList<String> notTerminals = new ArrayList<>();
+
+        notTerminals.add("<DC>");
+        notTerminals.add("<CA>");
+        notTerminals.add("<DM>");
+        notTerminals.add("<DCM>");
+        notTerminals.add("<RCM>");
+        notTerminals.add("<DV>");
+        notTerminals.add("<RDV>");
+        notTerminals.add("<DW>");
+        notTerminals.add("<DF>");
+        notTerminals.add("<EF>");
+        notTerminals.add("<DE>");
+        notTerminals.add("<DS>");
+        notTerminals.add("<CONC>");
+        notTerminals.add("<RC>");
+        notTerminals.add("<DIF>");
+        notTerminals.add("<RIF>");
+        notTerminals.add("<RE>");
+        notTerminals.add("<DFUN>");
+        notTerminals.add("<P>");
+        notTerminals.add("<RP>");
+        notTerminals.add("<DSC>");
+        notTerminals.add("<OP>");
+        notTerminals.add("<ROPC>");
+        notTerminals.add("<ED>");
+        notTerminals.add("<TC>");
+        notTerminals.add("<RTC>");
+        notTerminals.add("<CT>");
+        notTerminals.add("<DR>");
+        notTerminals.add("<R>");
+        notTerminals.add("<RR>");
+        notTerminals.add("<V>");
+        notTerminals.add("<LLF>");
+        notTerminals.add("<C>");
+        notTerminals.add("<CUR>");
+        notTerminals.add("<RV>");
+        notTerminals.add("<EX>");
+        notTerminals.add("<S>");
+        notTerminals.add("<OPR>");
+        notTerminals.add("<RO>");
+        notTerminals.add("<N>");
+        notTerminals.add("<CF>");
+        notTerminals.add("<RRET>");
+        notTerminals.add("<OR>");
+        notTerminals.add("<B>");
+        notTerminals.add("<O>");
+        notTerminals.add("<D>");
+        notTerminals.add("<L>");
+        notTerminals.add("<CONT>");
+        for (int i = 0; i < notTerminals.size(); i++){
+            p = Pattern.compile(notTerminals.get(i));
+            m = p.matcher(code);
+            code = m.replaceAll(espacio+notTerminals.get(i)+espacio);
+        }
+        this.code = code.split("(\t|"+espacio+")+");
+*/
         ArrayList<String> signos = new ArrayList<>();
 
         signos.add("\\+");

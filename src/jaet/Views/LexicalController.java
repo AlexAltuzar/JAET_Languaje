@@ -2,6 +2,7 @@ package jaet.Views;
 
 import jaet.Models.LexicalAnalyzer;
 import jaet.Models.LexicalToken;
+import jaet.Models.SyntacticAnalyzer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,7 +28,20 @@ public class LexicalController {
     @FXML
     void CompileAnalyzer(MouseEvent event) {
         tableLexicon.getItems().clear();
+        String text = "";
         lexical = analyzer.analyze(terminal.getText().trim());
+        ArrayList<String> words = new ArrayList<>();
+
+        for(int i=0;i< lexical.size();i++){
+            words.add(lexical.get(i).getWord());
+        }
+        System.out.println(words);
+        SyntacticAnalyzer syntacticAnalyzer = new SyntacticAnalyzer(words);
+        System.out.println(syntacticAnalyzer.isValid());
+        /*for(int i=0;i<syntacticAnalyzer.getProcess().size();i++){
+            text += syntacticAnalyzer.getProcess().get(i) +"\n";
+        }
+        System.out.println(text);*/
         showLexical();
 
     }
@@ -38,5 +52,9 @@ public class LexicalController {
         tableLexicon.getItems().addAll(this.lexical);
     }
 
+    /*archivio Prueba{
+        init main(current_){
+        }
+    }*/
 
 }
