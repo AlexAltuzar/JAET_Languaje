@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class SyntacticAnalyzer {
+
+    public SyntacticAnalyzer(){
+
+    }
     private ArrayList<String> string;
     private ArrayList<String> process = new ArrayList<>();
     public SyntacticAnalyzer(ArrayList<String> string) {
