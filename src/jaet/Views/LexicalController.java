@@ -1,5 +1,6 @@
 package jaet.Views;
 
+import jaet.Models.AnalysisTable;
 import jaet.Models.LexicalAnalyzer;
 import jaet.Models.LexicalToken;
 import jaet.Models.SyntacticAnalyzer;
@@ -24,19 +25,16 @@ public class LexicalController {
 
     private LexicalAnalyzer analyzer = new LexicalAnalyzer();
     private ArrayList<LexicalToken> lexical = new ArrayList<>();
+    private ArrayList<String> syntactical = new ArrayList<>();
 
     @FXML
     void CompileAnalyzer(MouseEvent event) {
         tableLexicon.getItems().clear();
         String text = "";
         lexical = analyzer.analyze(terminal.getText().trim());
-        ArrayList<String> words = new ArrayList<>();
-
-        for(int i=0;i< lexical.size();i++){
-            words.add(lexical.get(i).getWord());
-        }
-        System.out.println(words);
-        SyntacticAnalyzer syntacticAnalyzer = new SyntacticAnalyzer(words);
+        syntactical = analyzer.getSyntactic();
+        System.out.println(syntactical);
+        SyntacticAnalyzer syntacticAnalyzer = new SyntacticAnalyzer(syntactical);
         System.out.println(syntacticAnalyzer.isValid());
         /*for(int i=0;i<syntacticAnalyzer.getProcess().size();i++){
             text += syntacticAnalyzer.getProcess().get(i) +"\n";

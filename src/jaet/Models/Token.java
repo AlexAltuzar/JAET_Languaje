@@ -8,7 +8,7 @@ public class Token {
     private String number = "^[0-9]$";
     private String groupSymbols = "^(" + "\"" + "|" + "\\)" + "|" + "\\(" + "|" + "\\{" + "|" + "\\}" + "|" + "\'" + ")$";
     private String relationalOperator = "^(<|>|<=|>=|=|==|!=)$";
-    private String reservedWords = "^(archivio|init|main|current_|funzione|stamp|scegliere|if|else|while|for|return|enterokay|true|false|break|default)\\z";
+    private String reservedWords = "^(archivio|init|main|current_|funzione|stamp|scegliere|if|else|while|for|return|enterokay|true|false|break|default|ALPHANUMERICS)\\z";
     private String space = "^\n$";
     private String symbols = "^(,|#|;|:=)$";
     private String letter = "^[a-zA-Z]$";

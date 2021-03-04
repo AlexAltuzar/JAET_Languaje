@@ -23,6 +23,7 @@ public class SyntacticAnalyzer {
         do {
             if(i==string.size()) i--;
             String terminal = string.get(i);
+            System.out.println("___________________________________________________");
             System.out.println(pile);
             process.add(pile.toString());
 
