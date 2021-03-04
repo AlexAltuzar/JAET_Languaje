@@ -34,7 +34,6 @@ public class LexicalController {
         syntactical = analyzer.getSyntactic();
         System.out.println(syntactical);
         SyntacticAnalyzer syntacticAnalyzer = new SyntacticAnalyzer(syntactical);
-        System.out.println(syntacticAnalyzer.isValid());
         /*for(int i=0;i<syntacticAnalyzer.getProcess().size();i++){
             text += syntacticAnalyzer.getProcess().get(i) +"\n";
         }
