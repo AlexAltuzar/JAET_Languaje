@@ -34,7 +34,6 @@ public class LexicalAnalyzer extends Observable {
                 char[] digits = number.toCharArray();
                 for(int j = 0; j < digits.length; j++) {
                     if (token.isNumber(String.valueOf(digits[j]))){
-
                         syntactic.add(String.valueOf(digits[j]));
                     }
                 }
