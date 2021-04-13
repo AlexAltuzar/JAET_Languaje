@@ -2,7 +2,6 @@ package jaet.Models;
 
 public class Variable {
     private String name;
-    private String value;
     private String type;
 
     public Variable(String name, String type) {
@@ -16,9 +15,5 @@ public class Variable {
 
     public String getType() {
         return type;
-    }
-
-    public String getValue() {
-        return value;
     }
 }

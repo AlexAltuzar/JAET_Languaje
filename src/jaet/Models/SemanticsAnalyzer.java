@@ -40,7 +40,7 @@ public class SemanticsAnalyzer {
     private boolean isDV = false;
     private int isRDV = -1;
     private String variable = new String();
-    public void getNameVariable(String terminal){
+    public void getNameDV(String terminal){
         String type = null;
         if(declaration.equals("<DV>")) isDV=true;
         if(isDV && declaration.equals("<L>") || ((declaration.equals("<V>") || declaration.equals("<RV>")) && terminal.equals("_")) ){
@@ -57,33 +57,30 @@ public class SemanticsAnalyzer {
             isDV = false;
         }
 
-        /*archivio Prueba{
-            init main(current_){
-                    ___sumar = 10
-            }
-        }*/
-
         switch(isRDV){
             case 1:
                 if(declaration.equals("<S>")){
-                    if(isValid(terminal, "^[a-zA-Z]$")){
-                        type = "VARIABLE";
-                    }
-                    if(isValid(terminal, "\"")){
-                        type = "CADENA";
-                    }
-                    if(isValid(terminal, "true|false")){
-                        type = "BOOLEANO";
-                    }
-                    if(isValid(terminal, "^[0-9]$")){
-                        type = "ENTERO";
-                    }
+                    if(isValid(terminal, "^[a-zA-Z]$")) type = "VARIABLE";
+                    if(isValid(terminal, "\"")) type = "CADENA";
+                    if(isValid(terminal, "true|false")) type = "BOOLEANO";
+                    if(isValid(terminal, "^[0-9]$")) type = "ENTERO";
                     System.out.println("********************************************************************"+variable+" - "+type);
+                    isRDV = -1;
                     variable = "";
                 }
                 break;
             case 2:
+                type = "METODO";
+                System.out.println("********************************************************************"+variable+" - "+type);
+                isRDV = -1;
+                variable = "";
+                break;
             case 3:
+                type = "CONTADOR";
+                System.out.println("********************************************************************"+variable+" - "+type);
+                isRDV = -1;
+                variable = "";
+                break;
         }
 
 

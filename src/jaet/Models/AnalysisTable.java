@@ -97,8 +97,7 @@ public class AnalysisTable {
         derivation = table[row][column];
         if(!derivation.equals(" ")) {
             if(!derivation.equals("ε")){
-                semanticsAnalyzer.setDeclaration(notTerminal);
-                semanticsAnalyzer.getNameVariable(terminal);
+                setSemanticsAnalyzer(terminal, notTerminal);
 
                 words = derivation.split(" ");
                 for (int i = 0; i < words.length; i++) {
@@ -110,6 +109,11 @@ public class AnalysisTable {
         }
         return false;
 
+    }
+
+    private void setSemanticsAnalyzer(String terminal, String notTerminal){
+        semanticsAnalyzer.setDeclaration(notTerminal);
+        semanticsAnalyzer.getNameDV(terminal);
     }
 
     public ArrayList<String> getProduction() {
