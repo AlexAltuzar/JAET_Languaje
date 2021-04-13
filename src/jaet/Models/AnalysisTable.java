@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 public class AnalysisTable {
     private ArrayList<String> production = new ArrayList<>();
+    private SemanticsAnalyzer semanticsAnalyzer = new SemanticsAnalyzer();
 
     private String table [][] = {
             {" ","archivio","funzione","init","#","ALPHANUMERICS","^[a-zA-Z]$","_","^(=)$","^(\\+|\\-|\\*|/|\\^)$","while","for","enterokay","stamp","\"","true|false","^[0-9]$",",","if","else","scegliere","\'","default","break","return","^(<|>|<=|>=|==|!=)$","^(\\+\\+|\\-\\-)$","\\}",";","\\{","\\)","\\(","\n"},
@@ -72,6 +73,7 @@ public class AnalysisTable {
         int row=0, column=0;
         String[] columns;
         String derivation;
+        System.out.println("Terminal: "+terminal);
         for (int i = 0; i < table.length; i++) {
             columns = table[i];
             for(int j=0; j<columns.length;j++){
@@ -95,6 +97,9 @@ public class AnalysisTable {
         derivation = table[row][column];
         if(!derivation.equals(" ")) {
             if(!derivation.equals("ε")){
+                semanticsAnalyzer.setDeclaration(notTerminal);
+                semanticsAnalyzer.getNameVariable(terminal);
+
                 words = derivation.split(" ");
                 for (int i = 0; i < words.length; i++) {
                     String word = words[i];
@@ -127,5 +132,7 @@ public class AnalysisTable {
         }
         return false;
     }
+
+
 
 }
