@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 public class AnalysisTable {
     private ArrayList<String> production = new ArrayList<>();
-    private SemanticsAnalyzer semanticsAnalyzer = new SemanticsAnalyzer();
 
     private String table [][] = {
             {" ","archivio","funzione","init","#","ALPHANUMERICS","^[a-zA-Z]$","_","^(=)$","^(\\+|\\-|\\*|/|\\^)$","while","for","enterokay","stamp","\"","true|false","^[0-9]$",",","if","else","scegliere","\'","default","break","return","^(<|>|<=|>=|==|!=)$","^(\\+\\+|\\-\\-)$","\\}",";","\\{","\\)","\\(","\n"},
@@ -31,7 +30,7 @@ public class AnalysisTable {
             {"<P>"," "," "," "," "," ","<V> <RP>","<V> <RP> "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","ε"," "," "},
             {"<RP>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ",", <V> <RP>"," "," "," "," "," "," "," "," "," "," "," "," ","ε"," "," "},
             {"<DSC>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","scegliere := <V> { \n <OP> } \n"," "," "," "," "," "," "," "," "," "," "," "," "},
-            {"<OP>"," "," "," "," "," "," "," "," "," "," "," "," "," ","<TC> <ROPC>"," ","<TC> <ROPC>","<TC> <ROPC>"," "," "," "," "," "," "," "," "," ","ε"," "," "," "," "," "},
+            {"<OP>"," "," "," "," "," "," "," "," "," "," "," "," "," ","<TC> <ROPC>"," ","<TC> <ROPC>"," "," "," "," ","<TC> <ROPC>"," "," "," "," "," ","ε"," "," "," "," "," "},
             {"<ROPC>"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","default { \n <CUR> <RRET> } \n"," "," "," "," ","ε"," "," "," "," "," "},
             {"<TD>"," "," "," "," "," "," "," "," "," "," "," "," "," ","\" <C> \""," ","<N>"," "," "," "," ","\' <L> \'"," "," "," "," "," "," "," "," "," "," "," "},
             {"<TC>"," "," "," "," "," "," "," "," "," "," "," "," "," ","<TD> { \n <CUR> <RRET> } \n <RTC> <CT>"," ","<TD> { \n <CUR> <RRET> } \n <RTC> <CT>"," "," "," "," ","<TD> { \n <CUR> <RRET> } \n <RTC> <CT>"," "," "," "," "," "," "," "," "," "," "," "},
@@ -73,7 +72,6 @@ public class AnalysisTable {
         int row=0, column=0;
         String[] columns;
         String derivation;
-        System.out.println("Terminal: "+terminal);
         for (int i = 0; i < table.length; i++) {
             columns = table[i];
             for(int j=0; j<columns.length;j++){
@@ -83,7 +81,6 @@ public class AnalysisTable {
                     if(!table[row][column].equals(" ")){
                         if(table[i][0].equals("<L>") || table[i][0].equals("<O>") || table[i][0].equals("<B>") || table[i][0].equals("<D>") || table[i][0].equals("<OR>") || table[i][0].equals("<CONT>")){
                             table[i][j] = terminal;
-                            System.out.println(table[i][j]);
                         }
                     }
                     break;
@@ -97,8 +94,6 @@ public class AnalysisTable {
         derivation = table[row][column];
         if(!derivation.equals(" ")) {
             if(!derivation.equals("ε")){
-                setSemanticsAnalyzer(terminal, notTerminal);
-
                 words = derivation.split(" ");
                 for (int i = 0; i < words.length; i++) {
                     String word = words[i];
@@ -109,11 +104,6 @@ public class AnalysisTable {
         }
         return false;
 
-    }
-
-    private void setSemanticsAnalyzer(String terminal, String notTerminal){
-        semanticsAnalyzer.setDeclaration(notTerminal);
-        semanticsAnalyzer.getNameDV(terminal);
     }
 
     public ArrayList<String> getProduction() {
@@ -136,7 +126,4 @@ public class AnalysisTable {
         }
         return false;
     }
-
-
-
 }
